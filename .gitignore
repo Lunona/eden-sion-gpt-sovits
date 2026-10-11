@@ -1,0 +1,9 @@
+models/
+curated/
+imported/
+generated/
+temp/
+__pycache__/
+*.zip
+*.log
+server.pid
