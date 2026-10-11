@@ -1,11 +1,9 @@
-MIT License
+Non-commercial source-available license
 
 Copyright (c) 2026 nuoya1
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of the software code in this repository and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Use, modification and redistribution of the author-written reference-library code are permitted only for non-commercial purposes, with attribution and preservation of the accompanying terms. Commercial use is prohibited.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+Model weights and selected reference audio are subject to the same non-commercial restriction, without any grant or warranty of rights in the original game, characters, voice performances or third-party assets. Third-party software retains its original license.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-Scope: repository software code only. Model weights, original game audio, character rights and third-party assets are not licensed by this file.
+Full terms and disclaimer: 使用条款与免责声明.md
