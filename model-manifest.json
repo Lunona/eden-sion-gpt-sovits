@@ -1,0 +1,17 @@
+{
+  "gpt": "停顿补样 0.002 第2轮",
+  "sovits": "0.00002 第8轮",
+  "upstream_commit": "1b47ca07ef43a284e0b8bd7f29d3e1e3ff76082a",
+  "files": [
+    {
+      "file": "models/sion-pause-supplement-lr002-e2.ckpt",
+      "size": 155313632,
+      "sha256": "a0e88c077d11ee199dae0d9a3697c61555ac75b9a4e3e780134f5099269ffa14"
+    },
+    {
+      "file": "models/sion-timbre-lr00002_e8_s1392.pth",
+      "size": 172765491,
+      "sha256": "90b6d4a73aae7e5273bf1d3ba349a7c82a2d2ed288fca732a3f738e09a2c3413"
+    }
+  ]
+}
