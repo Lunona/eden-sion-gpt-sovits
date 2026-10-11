@@ -43,7 +43,7 @@ def add(audio,name,text,category,verified):
  key=uuid.uuid4().hex;dest=ROOT/'imported'/f'{key}.wav';dest.parent.mkdir(exist_ok=True)
  x,sr=sf.read(audio);sf.write(dest,x,sr,subtype='FLOAT')
  with LOCK:
-  rows=read();rows.append(dict(id=key,name=name.strip(),text=text.strip(),category=category,verified=bool(verified),audio=str(dest)));write(rows)
+  rows=read();rows.append(dict(id=key,name=name.strip(),text=text.strip(),category=category,verified=bool(verified),audio=dest.relative_to(ROOT).as_posix()));write(rows)
  return (gr.update(choices=choices('全部'),value=key),category_update(),*select(key),'已加入参考库。')
 def get_engine():
  global ENGINE
@@ -80,11 +80,11 @@ def generate(key,text,split,seed):
 if __name__=='__main__':get_engine()
 initialize();opts=choices('全部');default='baseline_warm' if any(r['id']=='baseline_warm' for r in read()) else (opts[0][1] if opts else None);audio,txt,cat,verified,name,note=select(default)
 with gr.Blocks(title='诗音参考音频库') as app:
- gr.Markdown('# 诗音参考音频库\n参考已按日文台词和剧情归类，并核对音频文本。选择符合台词的语气，再试听生成效果；分类不能保证相同情绪。\n\n当前候选：GPT 停顿补样第2轮＋SoVITS 0.00002第8轮。旧权重保留。')
+ gr.Markdown('# 诗音参考音频库\n本发布不附带原作音频或台词，参考库初始为空。请自行从合法持有的原作准备有权使用的3–10秒参考音频，并填写准确原文；分类不能保证相同情绪。\n\n当前候选：GPT 停顿补样第2轮＋SoVITS 0.00002第8轮。旧权重保留。')
  with gr.Row():
   with gr.Column():
    category=gr.Dropdown(['全部']+[c for c in CATEGORIES if any(r['category']==c for r in read())],value='全部',label='按语气筛选')
-   selected=gr.Dropdown(opts,value=default,label='选择参考音频')
+   selected=gr.Dropdown(opts,value=default,label='选择参考音频（请先自行导入）')
    audition=gr.Audio(value=audio,type='filepath',label='试听当前参考',interactive=False)
    reference_text=gr.Textbox(value=txt,label='参考音频对应日文原文',lines=3)
    refname=gr.Textbox(value=name,label='参考名称')
@@ -93,13 +93,14 @@ with gr.Blocks(title='诗音参考音频库') as app:
    basis=gr.Textbox(value=note,label='分类依据与剧情上下文',interactive=False,lines=5)
    savebtn=gr.Button('保存参考信息')
   with gr.Column():
-   target=gr.Textbox(label='要生成的日文台词',lines=5,value='一度、夜中に目が覚めたの。そのときに、なんとなく気配がしたから')
+   target=gr.Textbox(label='要生成的日文台词',lines=5,value='')
    split=gr.Checkbox(value=True,label='按自然句号分句（长句推荐）')
    seed=gr.Number(value=20261011,precision=0,label='随机种子（相同参数可复现）')
    run=gr.Button('用当前参考生成',variant='primary')
    result=gr.Audio(type='filepath',label='生成结果')
    message=gr.Textbox(label='状态',interactive=False)
- with gr.Accordion('加入新的参考音频',open=False):
+ with gr.Accordion('加入新的参考音频（原作参考需自行准备）',open=True):
+  gr.Markdown('原作：minori《eden*》。本项目不提供原作音频下载。请仅导入你有权使用的音频，填写与录音一致的日文原文。')
   upload=gr.Audio(type='filepath',label='上传3–10秒清晰参考音频')
   newname=gr.Textbox(label='名称');newtext=gr.Textbox(label='准确的日文原文',lines=2)
   newemotion=gr.Dropdown(CATEGORIES,value='平静',label='语气分类');newverified=gr.Checkbox(label='我已试听确认该语气')
