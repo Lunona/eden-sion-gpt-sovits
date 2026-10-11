@@ -4,7 +4,7 @@
 
 ## 下载与使用
 
-在 [Releases](../../releases) 下载 `sion-v1.0.0.zip`，解压后包含两份权重、15条参考音频及参考库界面。本包不包含 Python、CUDA、GPT-SoVITS 程序和通用预训练依赖；需先按 [GPT-SoVITS 官方项目](https://github.com/RVC-Boss/GPT-SoVITS) 安装完整环境，包含 v2ProPlus、日语文本前端、HuBERT/BERT 等对应依赖。
+在 [Releases](../../releases) 下载 `sion-v1.0.0-noncommercial.zip`，解压后包含两份权重、15条参考音频及参考库界面。本包不包含 Python、CUDA、GPT-SoVITS 程序和通用预训练依赖；需先按 [GPT-SoVITS 官方项目](https://github.com/RVC-Boss/GPT-SoVITS) 安装完整环境，包含 v2ProPlus、日语文本前端、HuBERT/BERT 等对应依赖。
 
 已验证的上游提交：`1b47ca07ef43a284e0b8bd7f29d3e1e3ff76082a`。参考库使用 Gradio 4.44.1。其他上游版本的 API 可能不同。
 
@@ -41,6 +41,11 @@
 
 ## 来源与许可
 
-基于 [RVC-Boss/GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)。本仓库自行编写的参考库代码按 MIT 许可开放，见 `LICENSE`。
+基于 [RVC-Boss/GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)。本仓库公开参考库源码，作者代码、模型权重及精选参考仅限非商业使用，见 `LICENSE` 及 [使用条款与免责声明](使用条款与免责声明.md)。第三方软件保留原许可证。
 
-角色、游戏及原始语音来自 minori 的 eden*；相应权利属于原权利人。本仓库的代码许可不覆盖原游戏素材、角色权利或模型所依赖的第三方权利，不作这些内容已获 MIT 授权的声明。权重与精选参考用于复现实验，不包含游戏安装包、完整剧本或完整语音数据集。
+角色、游戏及原始语音来自 minori 的 eden*；相应权利属于原权利人。本项目不转授原游戏素材、角色、配音表演或第三方权利，也不代表原权利人授权。权重与精选参考用于复现实验，不包含游戏安装包、完整剧本或完整语音数据集。
+
+## 免责声明与禁止商业用途
+
+这是非官方个人实验，与原权利人及配音演员无官方合作或代言关系。禁止模型、素材及生成内容用于付费配音、广告、收费服务、商业产品或转售；禁止冒充真人、虚假代言及违法侵权用途。公开传播须标明 AI 合成。具体适用范围、第三方权利及免责声明见 [完整条款](使用条款与免责声明.md)。由于存在商业限制，本项目为非商业源码公开，不宣称 OSI 开源许可。
+
