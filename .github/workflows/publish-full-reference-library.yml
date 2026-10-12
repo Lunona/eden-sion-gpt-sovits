@@ -1,0 +1,29 @@
+name: Publish restored 15-reference full package
+on:
+  push:
+    branches: [codex/publish-full-15-references]
+    paths:
+      - '.github/workflows/publish-full-reference-library.yml'
+      - 'release-payload/**'
+permissions:
+  contents: write
+concurrency:
+  group: publish-sion-full-15-references
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch this exact reviewed commit
+        env:
+          TASK_SHA: ${{ github.sha }}
+        run: |
+          git init .
+          git remote add origin https://github.com/Lunona/eden-sion-gpt-sovits.git
+          git fetch --depth=1 origin "$TASK_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Verify references and models, assemble full package, upload Release asset
+        env:
+          RELEASE_TOKEN: ${{ github.token }}
+        run: python3 release-payload/publish.py
