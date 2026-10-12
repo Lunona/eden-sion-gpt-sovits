@@ -1,0 +1,11 @@
+{
+  "app.py": "f93fbd9e7bd946ffb7ce4dcb3a67eae6f0c0db9abfbdf65bf8e44b0db7a3698d",
+  "translation.py": "dfa18c8ce5e977b718d95b93ade9599b23a5e2131b1d81df3b6b18059d2133fb",
+  "README.md": "68d3ea8a2765ce6f6706ebbff3d803a19db3affde5476ad7c517fca4b35a1a8e",
+  "docs/TUTORIAL.md": "85d2d79011da45745ff76c8bda185e28682350196b9e976762397ef87fad7968",
+  "docs/CHINESE_INPUT.md": "1cda4bc0ebebe5ab2e945e256d196507f2ea04a8ae2af8d168b3ebb5da7e63a5",
+  "docs/UPGRADE.md": "c4a10c5f0826fd93808443b4483922d0d0f8e568991c47cdcbba345d7bf7328e",
+  "tests/test_translation_flow.py": "bf543ca5ee7418ef21d93cae5babc438b5a68fd8a2cb43eab3e5102a23659caf",
+  "docs/images/06-language-input.png": "99552c24f2a88af061162444a1accc61d2ebf6856032428f06a1e42b83952c81",
+  "docs/images/07-japanese-preview.png": "b5913c55be1f00e67c4e6a9c1fe4d3911287a436053fcae43f0d7a1df6c26a8a"
+}

@@ -1,0 +1,28 @@
+name: Publish Chinese-input reference library v1.0.2
+on:
+  push:
+    branches: [codex/publish-chinese-input-v102]
+    paths: ['.github/workflows/publish-translation-release.yml', 'release-v102/**']
+permissions:
+  contents: write
+concurrency:
+  group: publish-sion-v102
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch reviewed release commit
+        env:
+          TASK_SHA: ${{ github.sha }}
+        run: |
+          git init .
+          git remote add origin https://github.com/Lunona/eden-sion-gpt-sovits.git
+          git fetch --depth=1 origin "$TASK_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Verify unchanged models and references and publish both download packages
+        env:
+          RELEASE_TOKEN: ${{ github.token }}
+          TASK_SHA: ${{ github.sha }}
+        run: python3 release-v102/publish.py
