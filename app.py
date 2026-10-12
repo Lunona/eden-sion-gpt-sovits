@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parent
 os.environ['GRADIO_TEMP_DIR']=str(ROOT/'temp')
 import gradio as gr
 import soundfile as sf
+from translation import prepare_text, TranslationError, KANA
 DB=ROOT/'references.json';LOCK=threading.Lock();ENGINE=None
 CATEGORIES=['平静','温柔','悲伤','开心','疑惑','不满','疲惫','虚弱','怀念','认真']
 MODEL=ROOT/'models/sion-pause-supplement-lr002-e2.ckpt'
@@ -77,14 +78,44 @@ def generate(key,text,split,seed):
   folder=ROOT/'generated';folder.mkdir(exist_ok=True);p=folder/(time.strftime('%Y%m%d-%H%M%S')+'-'+uuid.uuid4().hex[:6]+'.wav');sf.write(p,wav,sr)
   p.with_suffix('.json').write_text(json.dumps(dict(text=text,reference=r,gpt=str(MODEL),sovits=str(SOVITS),seed=seed,speed=1,natural_sentence_split=bool(split),postprocessing='none'),ensure_ascii=False,indent=2),encoding='utf-8')
  return str(p),f'已生成 {len(wav)/sr:.2f} 秒。原速，未调速或滤波。'
+def prepare_preview(text,mode,endpoint,model,api_key):
+ try:
+  japanese,route,note=prepare_text(text,mode,endpoint,model,api_key)
+  state=dict(source=text.strip(),mode=mode,endpoint=endpoint.strip(),model=model.strip(),japanese=japanese,route=route)
+  return japanese,state,None,note
+ except TranslationError as error:
+  return '',None,None,str(error)
+
+def generate_with_translation(key,text,split,seed,mode,endpoint,model,api_key,japanese,state):
+ matches=bool(state and state.get('source')==text.strip() and state.get('mode')==mode and state.get('endpoint')==endpoint.strip() and state.get('model')==model.strip())
+ if matches:
+  route=state['route'];note='使用已查看的日文。';japanese=japanese.strip()
+  if not japanese or len(japanese)>2000 or (route=='zh' and not KANA.search(japanese)):
+   return None,japanese,None,'实际朗读的日文为空、过长或缺少日文假名，请修改后重试。'
+ else:
+  japanese,state,unused,note=prepare_preview(text,mode,endpoint,model,api_key)
+  if state is None:return None,japanese,None,note
+  route=state['route']
+ try:
+  audio,status=generate(key,japanese,split,seed)
+  record=Path(audio).with_suffix('.json')
+  if record.is_file():
+   data=json.loads(record.read_text(encoding='utf-8'));data.update(source_text=text.strip(),input_language_mode=mode,input_route=route,japanese_text=japanese,translation_model=model.strip() if route=='zh' else None,translation_edited=japanese!=state['japanese'])
+   record.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
+  return audio,japanese,state,note+' '+status
+ except Exception:
+  return None,japanese,state,'日文已准备好，但语音生成失败。请检查参考音频、模型与运行环境后重试。'
+
+def clear_prepared():return '',None,None,'输入或翻译设置已变更，请重新查看日文或直接生成。'
+
 if __name__=='__main__':get_engine()
 initialize();opts=choices('全部');default='baseline_warm' if any(r['id']=='baseline_warm' for r in read()) else (opts[0][1] if opts else None);audio,txt,cat,verified,name,note=select(default)
 with gr.Blocks(title='诗音参考音频库') as app:
- gr.Markdown('# 诗音参考音频库\n本发布不附带原作音频或台词，参考库初始为空。请自行从合法持有的原作准备有权使用的3–10秒参考音频，并填写准确原文；分类不能保证相同情绪。\n\n当前候选：GPT 停顿补样第2轮＋SoVITS 0.00002第8轮。旧权重保留。')
+ gr.Markdown('# 诗音参考音频库\n'+(f'当前库中已有{len(opts)}条参考，可直接选择。' if opts else '当前参考库为空，请加入自己的参考。')+'支持日文直接生成，中文可通过单独配置的翻译服务转成日文后生成。最终输出为日语；分类不能保证相同情绪。\n\n模型：GPT 停顿补样第2轮＋SoVITS 0.00002第8轮。')
  with gr.Row():
   with gr.Column():
    category=gr.Dropdown(['全部']+[c for c in CATEGORIES if any(r['category']==c for r in read())],value='全部',label='按语气筛选')
-   selected=gr.Dropdown(opts,value=default,label='选择参考音频（请先自行导入）')
+   selected=gr.Dropdown(opts,value=default,label='选择参考音频'+(f'（已有{len(opts)}条）' if opts else '（请先自行导入）'))
    audition=gr.Audio(value=audio,type='filepath',label='试听当前参考',interactive=False)
    reference_text=gr.Textbox(value=txt,label='参考音频对应日文原文',lines=3)
    refname=gr.Textbox(value=name,label='参考名称')
@@ -93,14 +124,24 @@ with gr.Blocks(title='诗音参考音频库') as app:
    basis=gr.Textbox(value=note,label='分类依据与剧情上下文',interactive=False,lines=5)
    savebtn=gr.Button('保存参考信息')
   with gr.Column():
-   target=gr.Textbox(label='要生成的日文台词',lines=5,value='')
+   target=gr.Textbox(label='要说的内容（中文或日文）',lines=4,value='')
+   input_language=gr.Radio(['自动','中文','日文'],value='自动',label='输入语言')
+   gr.Markdown('有日文假名时直接生成；纯汉字默认按中文翻译。纯汉字日文或混合语言请手动选择。最终输出始终是日语。')
+   prepared=gr.State(None)
+   with gr.Accordion('中文翻译设置（使用中文时配置）',open=False):
+    gr.Markdown('填写你使用的翻译服务。支持兼容chat-completions的本地或在线服务；在线翻译会把输入文本发送给该服务。地址需包含服务要求的/v1；不附带或自动下载翻译模型。设置只用于当前运行，密钥不写入生成记录。')
+    translation_endpoint=gr.Textbox(label='翻译服务地址',placeholder='例如本机服务：http://127.0.0.1:11434/v1',value='')
+    translation_model=gr.Textbox(label='翻译模型名称',placeholder='填写该服务提供的模型名称',value='')
+    translation_key=gr.Textbox(label='服务密钥（本地服务可留空）',type='password',value='')
+   preview=gr.Button('查看／翻译日文')
+   japanese_preview=gr.Textbox(label='实际朗读的日文（可修改）',lines=4,value='')
    split=gr.Checkbox(value=True,label='按自然句号分句（长句推荐）')
    seed=gr.Number(value=20261011,precision=0,label='随机种子（相同参数可复现）')
    run=gr.Button('用当前参考生成',variant='primary')
    result=gr.Audio(type='filepath',label='生成结果')
    message=gr.Textbox(label='状态',interactive=False)
- with gr.Accordion('加入新的参考音频（原作参考需自行准备）',open=True):
-  gr.Markdown('原作：minori《eden*》。本项目不提供原作音频下载。请仅导入你有权使用的音频，填写与录音一致的日文原文。')
+ with gr.Accordion('加入新的参考音频（可选）',open=not bool(opts)):
+  gr.Markdown('已有参考可以直接选择。如需新增，请仅导入你有权使用的音频，填写与录音一致的日文原文。原作：minori《eden*》。')
   upload=gr.Audio(type='filepath',label='上传3–10秒清晰参考音频')
   newname=gr.Textbox(label='名称');newtext=gr.Textbox(label='准确的日文原文',lines=2)
   newemotion=gr.Dropdown(CATEGORIES,value='平静',label='语气分类');newverified=gr.Checkbox(label='我已试听确认该语气')
@@ -109,6 +150,9 @@ with gr.Blocks(title='诗音参考音频库') as app:
  selected.input(select,[selected],[audition,reference_text,emotion,confirmed,refname,basis],api_name='select_reference')
  savebtn.click(save,[selected,refname,reference_text,emotion,confirmed],[selected,category,message],api_name='save_reference')
  addbtn.click(add,[upload,newname,newtext,newemotion,newverified],[selected,category,audition,reference_text,emotion,confirmed,refname,basis,message],api_name='add_reference')
- run.click(generate,[selected,target,split,seed],[result,message],api_name='generate',concurrency_limit=1)
+ preview.click(prepare_preview,[target,input_language,translation_endpoint,translation_model,translation_key],[japanese_preview,prepared,result,message],api_name='prepare_text',concurrency_limit=1)
+ for control in [target,input_language,translation_endpoint,translation_model,translation_key]:
+  control.input(clear_prepared,[],[japanese_preview,prepared,result,message],queue=False)
+ run.click(generate_with_translation,[selected,target,split,seed,input_language,translation_endpoint,translation_model,translation_key,japanese_preview,prepared],[result,japanese_preview,prepared,message],api_name='generate',concurrency_limit=1)
 if __name__=='__main__':
  app.queue(default_concurrency_limit=1).launch(server_name='127.0.0.1',server_port=9882,inbrowser=False,allowed_paths=[str(ROOT)])
