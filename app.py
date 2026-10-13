@@ -8,8 +8,8 @@ import soundfile as sf
 from translation import prepare_text, TranslationError, KANA
 DB=ROOT/'references.json';LOCK=threading.Lock();ENGINE=None
 CATEGORIES=['平静','温柔','悲伤','开心','疑惑','不满','疲惫','虚弱','怀念','认真']
-MODEL=ROOT/'models/sion-pause-supplement-lr002-e2.ckpt'
-SOVITS=ROOT/'models/sion-timbre-lr00002_e8_s1392.pth'
+MODEL=ROOT/'models/eden_诗音_Sion_GPT.ckpt'
+SOVITS=ROOT/'models/eden_诗音_Sion_SoVITS.pth'
 def read():return json.loads(DB.read_text(encoding='utf-8'))
 def write(rows):
  tmp=DB.with_suffix('.tmp');tmp.write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(DB)

@@ -5,3 +5,5 @@ imported/
 generated/
 temp/
 *.zip
+launcher-logs/
+launcher-settings.json
