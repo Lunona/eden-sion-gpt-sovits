@@ -1,0 +1,48 @@
+name: Remove obsolete Sion versions
+on:
+  push:
+    branches: [codex/remove-obsolete-sion-versions]
+    paths: ['.github/workflows/remove-obsolete-versions.yml', 'release-cleanup/**']
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove only reviewed old release and tags
+        env:
+          RELEASE_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os,json,urllib.request,urllib.error
+          base='https://api.github.com/repos/Lunona/eden-sion-gpt-sovits'
+          headers={'Authorization':'Bearer '+os.environ['RELEASE_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'sion-version-cleanup'}
+          def api(path,method='GET'):
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(base+path,headers=headers,method=method),timeout=60) as r:
+                      return None if r.status==204 else json.load(r)
+              except urllib.error.HTTPError as e:
+                  if e.code==404:return None
+                  raise
+          latest=api('/releases/tags/v1.0.2')
+          assert latest['id']==410479129
+          assert len(latest['assets'])==1
+          asset=latest['assets'][0]
+          assert asset['name']=='sion-v1.0.2-full-15-references.zip'
+          assert asset['digest']=='sha256:dac4229d5e08018ebc9918fac395035e71bbd24639590208bca64095dea131c0'
+          expected={'v1.0.0':'a2e2327fb40cadcf94a8589d677efb28605117a2','v1.0.1':'75d08e6650a513a03f2db11b43849dc3ad969f11'}
+          for tag,sha in expected.items():
+              ref=api('/git/ref/tags/'+tag)
+              if ref is not None:assert ref['object']['sha']==sha
+              release=api('/releases/tags/'+tag)
+              if release is not None:
+                  assert tag=='v1.0.1' and release['id']==409701082
+                  api('/releases/'+str(release['id']),'DELETE')
+              if ref is not None:api('/git/refs/tags/'+tag,'DELETE')
+          for tag in expected:
+              assert api('/git/ref/tags/'+tag) is None
+              assert api('/releases/tags/'+tag) is None
+          current=api('/releases/tags/v1.0.2')
+          assert current['assets'][0]['digest']==asset['digest']
+          print(json.dumps({'removed':['v1.0.0','v1.0.1'],'kept':'v1.0.2','latest_full_package_unchanged':True}))
+          PY
