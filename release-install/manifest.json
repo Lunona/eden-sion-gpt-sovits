@@ -1,0 +1,256 @@
+{
+  "files": {
+    ".gitignore": {
+      "sha256": "22ffa92b4316b4b30ba02c3fc38fcfe7531e818acc514a5c7c5c1e29717cba62",
+      "source": ".gitignore",
+      "base": null
+    },
+    "LICENSE": {
+      "sha256": "5d8d275b9096bca098f1c799a3b6c1c1294ee330cb7becd9e705225e34ec9ea6",
+      "source": "LICENSE",
+      "base": null
+    },
+    "README.md": {
+      "sha256": "63d65c8424cc05d719657f0019e0871f4be6190fc9cf305761444bff1b802230",
+      "source": "README.md",
+      "base": null
+    },
+    "app.py": {
+      "sha256": "839f22ef8080faf493c113b5a64d8c94dd9d38cf08ab86a3b963d42e1ba88bb7",
+      "source": "app.py",
+      "base": null
+    },
+    "curated/sio-B003-0145.wav": {
+      "sha256": "3315e0a56d8aa90513ed25fa5e4b01bb21868fbe37b7c24ac733b51529d443d5",
+      "source": null,
+      "base": "curated/sio-B003-0145.wav"
+    },
+    "curated/sio-C002-0101.wav": {
+      "sha256": "ef3b6e2cd311cf439f559232f318fe5059cdbc76a66d14b9fc31d539ef729155",
+      "source": null,
+      "base": "curated/sio-C002-0101.wav"
+    },
+    "curated/sio-C002-0133.wav": {
+      "sha256": "331f87fb442bdffc2fa89d257d97d0e15ccd15cdfa5ff868cfc458c42dcffcd2",
+      "source": null,
+      "base": "curated/sio-C002-0133.wav"
+    },
+    "curated/sio-C003-0077.wav": {
+      "sha256": "b2e169c758d41efc3c70c1bd70d05968cb5e8687924a7338e440aa74f20d3db5",
+      "source": null,
+      "base": "curated/sio-C003-0077.wav"
+    },
+    "curated/sio-C003-0227.wav": {
+      "sha256": "65209530aa7d363b15bd8d32a9f5faba4202c0dac846ec4abcac6c186246f2e1",
+      "source": null,
+      "base": "curated/sio-C003-0227.wav"
+    },
+    "curated/sio-C004-0087.wav": {
+      "sha256": "021aa826063c95e735ec83ef32e958d48c9fb567ce4fa35cf4f4fe5d0487e69c",
+      "source": null,
+      "base": "curated/sio-C004-0087.wav"
+    },
+    "curated/sio-C006-0085.wav": {
+      "sha256": "895c1db2bec078dd91f390241eaafdb9a74331f82390a2e9ccfb2402ac38656c",
+      "source": null,
+      "base": "curated/sio-C006-0085.wav"
+    },
+    "curated/sio-C007-0175.wav": {
+      "sha256": "5f7856eb84ac7f34739b29b055b7cf9a3f5cebb951d8cdf7c4f0baab66fe5332",
+      "source": null,
+      "base": "curated/sio-C007-0175.wav"
+    },
+    "curated/sio-C007-0201.wav": {
+      "sha256": "cb93e0730317d08156581d5b7ee63e9c63ee966c0361729cad98ec9a60ba3672",
+      "source": null,
+      "base": "curated/sio-C007-0201.wav"
+    },
+    "curated/sio-C008-0025.wav": {
+      "sha256": "06c98eac7845091779355224fec21a68937bd68aef28b7eb249307f15d15cf2f",
+      "source": null,
+      "base": "curated/sio-C008-0025.wav"
+    },
+    "curated/sio-C011-0059.wav": {
+      "sha256": "f15df6532a13d896624671c04523454404d8a171e880bda007116acb965de69d",
+      "source": null,
+      "base": "curated/sio-C011-0059.wav"
+    },
+    "curated/sio-C011-0091.wav": {
+      "sha256": "b98ae0c0346629416eb79c65907ba0249afc3611719f97f29f4a6f01c745ddc5",
+      "source": null,
+      "base": "curated/sio-C011-0091.wav"
+    },
+    "curated/sio-C013-0113.wav": {
+      "sha256": "e511bf94eb5f3af3c34abbc3cd8f2f3762a939b834e2b899805d7e6c9b62cc14",
+      "source": null,
+      "base": "curated/sio-C013-0113.wav"
+    },
+    "curated/sio-C013-0121.wav": {
+      "sha256": "b8abaddfc5865925439c85bbb5d8cd42002669970e8325ff73026dde4e00444f",
+      "source": null,
+      "base": "curated/sio-C013-0121.wav"
+    },
+    "curated/sio-C013-0145.wav": {
+      "sha256": "264daa2e3597da59ab440c5a540189a25e560f568fbb5d9eb32fc03f73a73560",
+      "source": null,
+      "base": "curated/sio-C013-0145.wav"
+    },
+    "direct_translation.py": {
+      "sha256": "8605d691937d3daf6a6b73bca592d2054e3524ea1ea0fdee3e3ab7c3a3ee03ca",
+      "source": "direct_translation.py",
+      "base": null
+    },
+    "docs/CHINESE_INPUT.md": {
+      "sha256": "f4ea7475987c3fbfff39387130606d6aa6d7470ad3dc63f4440301b6b9141249",
+      "source": "docs/CHINESE_INPUT.md",
+      "base": null
+    },
+    "docs/TUTORIAL.md": {
+      "sha256": "dabc366df91f7a0a2263083bb970c557b83d8dd40c16cb0b11e1cadccb22f448",
+      "source": "docs/TUTORIAL.md",
+      "base": null
+    },
+    "docs/UPGRADE.md": {
+      "sha256": "ca1c4c264f28a9adcd7466859444d6394f43ab22df0377107bb7d0b131f48907",
+      "source": "docs/UPGRADE.md",
+      "base": null
+    },
+    "docs/images/01-empty-library.jpg": {
+      "sha256": "d94e3f036fb89e11ec894746440a95744b6bbc95970ee85370a1cfcc65d73e8b",
+      "source": "docs/images/01-empty-library.jpg",
+      "base": null
+    },
+    "docs/images/03-upload-synthetic-demo.jpg": {
+      "sha256": "19cd32f8cfe118002853b838ad3fdba80fb407813d184089f59aa0bdd34c8110",
+      "source": "docs/images/03-upload-synthetic-demo.jpg",
+      "base": null
+    },
+    "docs/images/04-text-before-generation.jpg": {
+      "sha256": "eb15c2671604cbebc4e56179ae34bff2cd22b9788f3c7f92f1f1c8f5deb7df9f",
+      "source": "docs/images/04-text-before-generation.jpg",
+      "base": null
+    },
+    "docs/images/05-generated-result.jpg": {
+      "sha256": "2001c683746bd473a7d4f1a4c7dc17601b0bf636dff3b981db87296d7a323351",
+      "source": "docs/images/05-generated-result.jpg",
+      "base": null
+    },
+    "docs/images/06-language-input.png": {
+      "sha256": "99552c24f2a88af061162444a1accc61d2ebf6856032428f06a1e42b83952c81",
+      "source": "docs/images/06-language-input.png",
+      "base": null
+    },
+    "docs/images/07-japanese-preview.png": {
+      "sha256": "b5913c55be1f00e67c4e6a9c1fe4d3911287a436053fcae43f0d7a1df6c26a8a",
+      "source": "docs/images/07-japanese-preview.png",
+      "base": null
+    },
+    "docs/images/08-unified-tabs.png": {
+      "sha256": "3ee5953247ab29b56f1c847e6873dad97293acce60bbdd4f7775631975970dfd",
+      "source": "docs/images/08-unified-tabs.png",
+      "base": null
+    },
+    "docs/images/09-direct-api.png": {
+      "sha256": "9053e5e04d39f8843b83d3860277fd38e38198a8d83ef0b3f8761105e9051f3c",
+      "source": "docs/images/09-direct-api.png",
+      "base": null
+    },
+    "docs/images/README.md": {
+      "sha256": "8fa3c93d2cb67522b348674d5ae015fd1853fce0b3b89cf3d09e6487ff572d71",
+      "source": "docs/images/README.md",
+      "base": null
+    },
+    "integrated_ui.py": {
+      "sha256": "8f0bebb998c95fe246b5d73de228bdeb2b2fbbf7b9a5d57291b611e4a6e1cde6",
+      "source": "integrated_ui.py",
+      "base": null
+    },
+    "model-manifest.json": {
+      "sha256": "61e3782451dcaabf1db2fa2500f4195009e9f319b1f4180b7d32f2261b0df67d",
+      "source": "model-manifest.json",
+      "base": null
+    },
+    "models/eden_诗音_Sion_GPT.ckpt": {
+      "sha256": "a0e88c077d11ee199dae0d9a3697c61555ac75b9a4e3e780134f5099269ffa14",
+      "source": null,
+      "base": "models/eden_诗音_Sion_GPT.ckpt"
+    },
+    "models/eden_诗音_Sion_SoVITS.pth": {
+      "sha256": "90b6d4a73aae7e5273bf1d3ba349a7c82a2d2ed288fca732a3f738e09a2c3413",
+      "source": null,
+      "base": "models/eden_诗音_Sion_SoVITS.pth"
+    },
+    "reference-manifest.json": {
+      "sha256": "26d825cedafd7b06e5ef50d3e6d2613ea55ff05bf22683a4923184e56fd670dc",
+      "source": null,
+      "base": "reference-manifest.json"
+    },
+    "references.json": {
+      "sha256": "e7213cfe14f8ec796468a305335cd5fdbbe226da46f16b79faf662433c82f428",
+      "source": null,
+      "base": "references.json"
+    },
+    "start_sion.ps1": {
+      "sha256": "602491621487765fd46836aa5294f5d35a87c76d75ec15eb37735a2be961bc25",
+      "source": "start_sion.ps1",
+      "base": null
+    },
+    "tests/test_translation_flow.py": {
+      "sha256": "bf543ca5ee7418ef21d93cae5babc438b5a68fd8a2cb43eab3e5102a23659caf",
+      "source": "tests/test_translation_flow.py",
+      "base": null
+    },
+    "translation.py": {
+      "sha256": "dfa18c8ce5e977b718d95b93ade9599b23a5e2131b1d81df3b6b18059d2133fb",
+      "source": "translation.py",
+      "base": null
+    },
+    "unified_controller.py": {
+      "sha256": "f0b2ef300cf39250e23efacf6324cfb7ed1d35494457de2db59ae9866fa4da51",
+      "source": "unified_controller.py",
+      "base": null
+    },
+    "使用条款与免责声明.md": {
+      "sha256": "4af6e77303541f3384453abc66a0482ada835986f9ffa54ae6e2e34d37b87387",
+      "source": "使用条款与免责声明.md",
+      "base": null
+    },
+    "停止GPT-SoVITS.cmd": {
+      "sha256": "29c700d4214665106cc41e7a77e6d39066d9ba00ea3c8aba1a7cbdca90c3fdf9",
+      "source": "停止GPT-SoVITS.cmd",
+      "base": null
+    },
+    "参考分类说明.md": {
+      "sha256": "5b8e7f3e62c42bfb0e81f2b999eb04281649e522268c499f79e3672f3b1907bc",
+      "source": "参考分类说明.md",
+      "base": null
+    },
+    "启动GPT-SoVITS.cmd": {
+      "sha256": "ffcfb6f89bc876d53af3c76c4cedcb375afe36ca2366a93addbf06c55ee00167",
+      "source": "启动GPT-SoVITS.cmd",
+      "base": null
+    },
+    "启动参考库.ps1": {
+      "sha256": "bffba6d349ab0cd825708c427c05243414f52a8161c47b95523aaa4997a5c9ad",
+      "source": "启动参考库.ps1",
+      "base": null
+    },
+    "启动诗音.ps1": {
+      "sha256": "602491621487765fd46836aa5294f5d35a87c76d75ec15eb37735a2be961bc25",
+      "source": "启动诗音.ps1",
+      "base": null
+    },
+    "docs/INSTALL_AND_IMPORT.md": {
+      "sha256": "67737c1f0e8302f4b97d583932b5447e2aca123da2acc50927a787089757facf",
+      "source": "docs/INSTALL_AND_IMPORT.md",
+      "base": null
+    },
+    "先看这里_环境安装与模型导入.md": {
+      "sha256": "ae01bc530b35328e482958e15b00dd1753374a1be53b20298e36ea60ac32c66b",
+      "source": "先看这里_环境安装与模型导入.md",
+      "base": null
+    }
+  },
+  "zip_sha256": "8109c088a3a617d8b877dd50cbd38091d2c8744f87f8282abc6969019cc36884",
+  "zip_size": 306846689
+}
