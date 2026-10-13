@@ -2,7 +2,16 @@
 
 诗音（シオン / Sion）的日语语音模型。完整版包含两份最终模型、15条参考语音及日文原文、统一语音页面和图文教程。
 
-## 下载后从这里打开
+## 首次使用先看：这是诗音模型包，需要完整环境
+
+**GPT-SoVITS 原项目与作者团队：[RVC-Boss/GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)，许可证 [MIT](https://github.com/RVC-Boss/GPT-SoVITS/blob/main/LICENSE)。游戏与角色原作：minori《eden*》。诗音微调模型、参考整理和配套页面由 Lunona 发布。本项目不是原作者或官方整合环境。**
+
+本站约307MB的下载包没有Python、CUDA和主程序，不能独立运行。第一次使用请先看 **[完整环境安装与诗音模型导入教程](docs/INSTALL_AND_IMPORT.md)**：包含原作者下载入口、v2ProPlus版本选择、两份权重放到哪个目录、推理页面怎么选择模型，以及配套统一页面的首次路径设置。
+
+- 原版路线：安装支持v2ProPlus的GPT-SoVITS，把两个权重分别复制到GPT_weights_v2ProPlus、SoVITS_weights_v2ProPlus，再刷新和选择。
+- 配套路线：已有完整环境后，双击本包启动脚本并指定环境路径，自动加载本包权重，不必手动复制。
+
+## 已有完整环境：从这里打开
 
 1. 在[发布页](https://github.com/Lunona/eden-sion-gpt-sovits/releases/tag/v1.0.2)下载 **`sion-v1.0.2-full-15-references.zip`**，解压到新目录。
 2. 双击第一层的 **`启动GPT-SoVITS.cmd`**。首次使用粘贴已有 GPT-SoVITS 完整环境的安装目录；之后会记住。若未自动找到环境 Python，按提示填写该环境的 python.exe。

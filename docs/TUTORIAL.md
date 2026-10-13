@@ -1,5 +1,7 @@
 # 从下载到文字生成音频
 
+**第一次使用、还没有完整GPT-SoVITS环境：先看[环境安装与模型导入](INSTALL_AND_IMPORT.md)。** 里面按原作者说明列出下载入口和v2ProPlus导入步骤；本模型包不是完整软件。GPT-SoVITS原项目为[RVC-Boss/GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)，游戏与角色原作为minori《eden*》；本项目由Lunona微调模型并提供配套界面。
+
 ## 1. 启动同一个页面
 
 下载新版完整版，解压到新目录，双击 **启动GPT-SoVITS.cmd**。首次粘贴已有 GPT-SoVITS 完整环境的目录，例如环境根目录或含 GPT_SoVITS/inference_webui.py 的程序目录。启动器会查找该环境中的 Python；找不到时再按提示粘贴 Python 路径。安装路径只保存在本机 launcher-settings.json，密钥不保存在这里。
