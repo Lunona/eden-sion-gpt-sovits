@@ -36,7 +36,7 @@ if canonical.get('digest')!=expected:
     package=Path(name)
     with zipfile.ZipFile(package,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
         for path,data in sorted(entries.items()):
-            info=zipfile.ZipInfo(path,(2026,10,13,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
+            info=zipfile.ZipInfo(path,(2026,10,13,0,0,0));info.create_system=3;info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
             archive.writestr(info,data,compress_type=zipfile.ZIP_DEFLATED,compresslevel=6)
     assert hashlib.sha256(package.read_bytes()).hexdigest()==manifest['zip_sha256']
     with zipfile.ZipFile(package) as archive:assert archive.testzip() is None
