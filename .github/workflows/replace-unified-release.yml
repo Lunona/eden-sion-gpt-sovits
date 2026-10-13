@@ -1,0 +1,27 @@
+name: Replace reviewed Sion full package
+on:
+  push:
+    branches: [codex/replace-unified-v102]
+    paths: ['.github/workflows/replace-unified-release.yml', 'release-unified/**']
+permissions:
+  contents: write
+concurrency:
+  group: replace-sion-full-v102
+  cancel-in-progress: false
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Fetch the reviewed commit
+        env:
+          TASK_SHA: ${{ github.sha }}
+        run: |
+          git init .
+          git remote add origin https://github.com/Lunona/eden-sion-gpt-sovits.git
+          git fetch --depth=1 origin "$TASK_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Verify package and replace full release asset
+        env:
+          RELEASE_TOKEN: ${{ github.token }}
+        run: python3 release-unified/publish.py
