@@ -2,7 +2,7 @@
 
 诗音（シオン / Sion）的日语语音模型与生成界面。**当前发布的是可独立运行的 Windows 完整整合包，已带 Python、GPT-SoVITS 主程序、PyTorch/CUDA 运行依赖、生成所需预训练模型、两份诗音权重和完整15条参考，无需另装 GPT-SoVITS。**
 
-**GPT-SoVITS 原作者与团队：[RVC-Boss 及项目贡献者](https://github.com/RVC-Boss/GPT-SoVITS)，原项目许可证 [MIT](https://github.com/RVC-Boss/GPT-SoVITS/blob/main/LICENSE)。游戏、角色与原始声音：minori《eden*》。诗音模型微调、参考整理、配套页面与本整合包：Lunona。** 本包是非官方个人整合，各第三方组件保留自身版权和许可证，详见包内 `THIRD_PARTY_NOTICES.md`。
+**GPT-SoVITS 原作者与团队：[RVC-Boss 及项目贡献者](https://github.com/RVC-Boss/GPT-SoVITS)，原项目许可证 [MIT](https://github.com/RVC-Boss/GPT-SoVITS/blob/main/LICENSE)。游戏、角色与原始声音：minori《eden\*》。诗音模型微调、参考整理、配套页面与本整合包：Lunona。** 本包是非官方个人整合，各第三方组件保留自身版权和许可证，详见包内 `THIRD_PARTY_NOTICES.md`。
 
 ## 下载、解压、启动
 
